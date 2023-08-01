@@ -13,6 +13,43 @@ import OverlayController
 //MARK: - MarsSwiftViewWrapable
 
 #if os(iOS) && canImport(OverlayController)
+
+extension MarsBase where Base : UIView {
+    
+    public func ovcPresent(
+        _ view: UIView?,
+        maskStyle: OverlayMaskStyle = .black(opacity: 0.7),
+        position: OverlayLayoutPosition = .bottom,
+        positionOffset: CGFloat = 0,
+        style: OverlaySlideStyle = .fromToBottom,
+        windowLevel: OverlayWindowLevel = .low,
+        isDismissOnMaskTouched: Bool = true,
+        isPanGestureEnabled: Bool = true,
+        panDismissPercent: CGFloat = 0.5,
+        duration: TimeInterval = 0.3,
+        completion: (() -> Void)? = nil,
+        didDismiss: @escaping () -> Void)
+    {
+        base.ms_ovcPresent(view,
+                           maskStyle: maskStyle,
+                           position: position,
+                           positionOffset: positionOffset,
+                           style: style,
+                           windowLevel: windowLevel,
+                           isDismissOnMaskTouched: isDismissOnMaskTouched,
+                           isPanGestureEnabled: isPanGestureEnabled,
+                           panDismissPercent: panDismissPercent,
+                           duration: duration,
+                           completion: completion,
+                           didDismiss: didDismiss)
+    }
+    
+    public func ovcDismiss(duration: TimeInterval = 0.3, completion: (() -> Void)? = nil) {
+        base.ms_ovcDismiss(duration: duration, completion: completion)
+    }
+    
+}
+
 extension UIView: MarsSwiftViewWrapable {
     
     private var ms_overlayController: OverlayController? {
@@ -68,6 +105,50 @@ extension UIView: MarsSwiftViewWrapable {
 
 #if os(iOS) && canImport(Toast_Swift)
 import Toast_Swift
+
+extension MarsBase where Base : UIView {
+    
+    public func showToast(_ message: String?, completion: ((_ didTap: Bool) -> Void)? = nil)
+    {
+        base.ms_showToast(message, completion: completion)
+    }
+    
+    public func showToast(_ message: String?, image: UIImage?, completion: ((_ didTap: Bool) -> Void)? = nil)
+    {
+        base.ms_showToast(message, image: image, completion: completion)
+    }
+    
+    public func showToast(_ message: String?, title: String?, image: UIImage?, completion: ((_ didTap: Bool) -> Void)? = nil)
+    {
+        base.ms_showToast(message, title: title, image: image, completion: completion)
+    }
+    
+    public func showToast(_ message: String?, duration: TimeInterval = ToastManager.shared.duration, position: ToastPosition = ToastManager.shared.position, title: String?, image: UIImage?, style: ToastStyle, completion: ((_ didTap: Bool) -> Void)? = nil)
+    {
+        base.ms_showToast(message, duration: duration, position: position, title: title, image: image, style: style, completion: completion)
+    }
+    
+    public func showToast(_ message: String?, duration: TimeInterval = ToastManager.shared.duration, point: CGPoint, title: String? = nil, image: UIImage? = nil, style: ToastStyle = ToastManager.shared.style, completion: ((_ didTap: Bool) -> Void)? = nil)
+    {
+        base.ms_showToast(message, duration: duration, point: point, title: title, image: image, style: style, completion: completion)
+    }
+    
+    public func hideAllToasts()
+    {
+        base.ms_hideAllToasts()
+    }
+    
+    public func showToastActivity(_ position: ToastPosition)
+    {
+        base.ms_showToastActivity(position)
+    }
+    
+    public func ms_hideToastActivity()
+    {
+        base.ms_hideToastActivity()
+    }
+    
+}
 
 extension UIView: MarsToastViewWrapable {
     

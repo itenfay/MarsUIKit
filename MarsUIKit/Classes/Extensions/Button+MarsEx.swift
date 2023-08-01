@@ -11,6 +11,15 @@ import UIKit
 import RxSwift
 import RxCocoa
 
+extension MarsBase where Base : UIButton {
+    public var whiteIndicator: UIActivityIndicatorView {
+        get { base.ms_whiteIndicator }
+        set {
+            base.ms_whiteIndicator = newValue
+        }
+    }
+}
+
 extension UIButton {
     
     @objc public var ms_whiteIndicator: UIActivityIndicatorView {

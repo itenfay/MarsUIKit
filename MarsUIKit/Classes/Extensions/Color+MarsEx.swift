@@ -8,6 +8,52 @@
 import Foundation
 #if os(iOS)
 
+extension MarsBase where Base : UIColor {
+    
+    /// Creates a color object using the specified opacity and RGB component values.
+    ///
+    /// - Parameters:
+    ///   - red: The red value of the color object.
+    ///   - green: The green value of the color object.
+    ///   - blue: The blue value of the color object.
+    ///   - alpha: The opacity value of the color object.
+    /// - Returns: The color object. The color information represented by this object is in an RGB colorspace.
+    public static func color(red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat = 1) -> UIColor?
+    {
+        return UIColor.ms_color(red: red, green: green, blue: blue, alpha: alpha)
+    }
+    
+    /// Creates Color from RGB values with optional alpha.
+    ///
+    /// - Parameters:
+    ///   - hex: Hex Int (example: 0xDEA3B6).
+    ///   - alpha: Optional alpha value (default is 1).
+    public static func color(hex: Int, alpha: CGFloat = 1) -> UIColor?
+    {
+        return UIColor.ms_color(hex: hex, alpha: alpha)
+    }
+    
+    /// Creates Color from hexadecimal string with optional alpha.
+    ///
+    /// - Parameters:
+    ///   - hexString: Hexadecimal string (examples: EDE7F6, 0xEDE7F6, #EDE7F6, #0ff, 0xF0F, ..).
+    ///   - alpha: Optional alpha value (default is 1).
+    public static func color(hexString: String, alpha: CGFloat = 1) -> UIColor?
+    {
+        return UIColor.ms_color(hexString: hexString, alpha: alpha)
+    }
+    
+    /// Draws an image of the color with the specified size.
+    ///
+    /// - Parameter size: The size of getting new image.
+    /// - Returns: An image of the color with the specified size.
+    public func drawImage(with size: CGSize = .init(width: 1, height: 1)) -> UIImage?
+    {
+        return base.ms_drawImage(with: size)
+    }
+    
+}
+
 extension UIColor {
     
     /// Creates a color object using the specified opacity and RGB component values.

@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'MarsUIKit'
-  s.version          = '1.0.0'
+  s.version          = '1.0.1'
   s.summary          = 'MarsUIKit wraps some commonly used UI components.'
 
 # This description is used to generate tags and improve search results.
@@ -51,6 +51,7 @@ Pod::Spec.new do |s|
   s.dependency 'Kingfisher'
   s.dependency 'MJRefresh'
   s.dependency 'KafkaRefresh'
+  s.dependency 'DZNEmptyDataSet'
   # SVGAPlayer/Source/pbobjc/Svga.pbobjc.m:1063:14: error: conflicting types for 'OSAtomicCompareAndSwapPtrBarrier'
   #s.dependency 'SVGAPlayer'
   

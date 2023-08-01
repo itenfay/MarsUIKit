@@ -21,6 +21,117 @@ import UIKit
 
 //MARK: - MarsCommonWrapable
 
+extension MarsBase where Base : NSObject {
+    #if canImport(SVProgressHUD)
+    
+    /// Show progress HUD with the status.
+    public func showProgressHUD(withStatus status: String?)
+    {
+        base.ms_showProgressHUD(withStatus: status)
+    }
+    
+    /// Show progress HUD with the status and delay.
+    public func showProgressHUD(withStatus status: String?, delay: TimeInterval)
+    {
+        base.ms_showProgressHUD(withStatus: status, delay: delay)
+    }
+    
+    /// Dismiss progress HUD.
+    public func ms_dismissProgressHUD()
+    {
+        ms_dismissProgressHUD(withDelay: 0.3)
+    }
+    
+    /// Dismiss progress HUD with the delay.
+    public func ms_dismissProgressHUD(withDelay delay: TimeInterval)
+    {
+        SVProgressHUD.dismiss(withDelay: delay)
+    }
+    #endif
+    
+    #if canImport(SwiftMessages)
+    public func showMessages(withStyle style: MarsMessagesBoxStyle, body: String?)
+    {
+        base.ms_showMessages(withStyle: style, body: body)
+    }
+    
+    public func showMessages(withStyle style: MarsMessagesBoxStyle, title: String?, body: String?)
+    {
+        base.ms_showMessages(withStyle: style, title: title, body: body)
+    }
+    
+    public func showMessages(withStyle style: MarsMessagesBoxStyle, title: String?, body: String?, textAlignment: NSTextAlignment)
+    {
+        base.ms_showMessages(withStyle: style, title: title, body: body, textAlignment: textAlignment)
+    }
+    
+    public func showMessages(
+        withStyle style: MarsMessagesBoxStyle,
+        title: String?,
+        body: String?,
+        textAlignment: NSTextAlignment,
+        iconImage: UIImage?,
+        iconText: String?,
+        buttonImage: UIImage?,
+        buttonTitle: String?,
+        buttonTapHandler: ((_ button: UIButton) -> Void)?)
+    {
+        base.ms_showMessages(withStyle: style,
+                             title: title,
+                             body: body,
+                             textAlignment: textAlignment,
+                             iconImage: iconImage,
+                             iconText: iconText,
+                             buttonImage: buttonImage,
+                             buttonTitle: buttonTitle,
+                             buttonTapHandler: buttonTapHandler)
+    }
+    
+    public func hideMessages()
+    {
+        base.ms_hideMessages()
+    }
+    #endif
+    
+    #if canImport(Toaster)
+    public func restoreToastAppearance()
+    {
+        base.ms_restoreToastAppearance()
+    }
+    
+    public func updateToastAppearance(with bottomOffsetPortrait: CGFloat, maxWidthRatio: CGFloat)
+    {
+        base.ms_updateToastAppearance(with: bottomOffsetPortrait, maxWidthRatio: maxWidthRatio)
+    }
+    
+    public func getToastDuration(type: MarsToasterDurationType, block: (() -> TimeInterval)?) -> TimeInterval
+    {
+        return base.ms_getToastDuration(type: type, block: block)
+    }
+    
+    public func makeToast(text: String)
+    {
+        base.ms_makeToast(text: text)
+    }
+    
+    public func makeToast(text: String, delay: TimeInterval, duration: TimeInterval)
+    {
+        base.ms_makeToast(text: text, delay: delay, duration: duration)
+    }
+    
+    public func makeToast(attributedString: NSAttributedString)
+    {
+        base.ms_makeToast(attributedString: attributedString)
+    }
+    
+    public func makeToast(attributedString: NSAttributedString, delay: TimeInterval, duration: TimeInterval)
+    {
+        base.ms_makeToast(attributedString: attributedString, delay: delay, duration: duration)
+    }
+    #endif
+    
+}
+
 extension NSObject: MarsCommonWrapable {
     
     #if canImport(SVProgressHUD)
