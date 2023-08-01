@@ -51,6 +51,7 @@ Pod::Spec.new do |s|
   s.dependency 'Kingfisher'
   s.dependency 'MJRefresh'
   s.dependency 'KafkaRefresh'
+  # SVGAPlayer/Source/pbobjc/Svga.pbobjc.m:1063:14: error: conflicting types for 'OSAtomicCompareAndSwapPtrBarrier'
   #s.dependency 'SVGAPlayer'
   
 end
