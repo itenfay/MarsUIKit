@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'MarsUIKit'
-  s.version          = '1.0.1'
+  s.version          = '1.0.3'
   s.summary          = 'MarsUIKit wraps some commonly used UI components.'
 
 # This description is used to generate tags and improve search results.

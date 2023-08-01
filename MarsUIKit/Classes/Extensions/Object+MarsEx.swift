@@ -22,8 +22,8 @@ import UIKit
 //MARK: - MarsCommonWrapable
 
 extension MarsBase where Base : NSObject {
-    #if canImport(SVProgressHUD)
     
+    #if canImport(SVProgressHUD)
     /// Show progress HUD with the status.
     public func showProgressHUD(withStatus status: String?)
     {
@@ -37,15 +37,15 @@ extension MarsBase where Base : NSObject {
     }
     
     /// Dismiss progress HUD.
-    public func ms_dismissProgressHUD()
+    public func dismissProgressHUD()
     {
-        ms_dismissProgressHUD(withDelay: 0.3)
+        base.ms_dismissProgressHUD()
     }
     
     /// Dismiss progress HUD with the delay.
-    public func ms_dismissProgressHUD(withDelay delay: TimeInterval)
+    public func dismissProgressHUD(withDelay delay: TimeInterval)
     {
-        SVProgressHUD.dismiss(withDelay: delay)
+        base.ms_dismissProgressHUD(withDelay: delay)
     }
     #endif
     
