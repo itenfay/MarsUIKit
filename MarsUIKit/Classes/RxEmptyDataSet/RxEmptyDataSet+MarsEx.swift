@@ -7,10 +7,9 @@
 
 #if os(iOS) || os(tvOS)
 import UIKit
-#if canImport(RxSwift) && canImport(RxCocoa) && canImport(DZNEmptyDataSet)
+#if canImport(RxSwift) && canImport(RxCocoa)
 import RxSwift
 import RxCocoa
-import DZNEmptyDataSet
 
 public enum MarsEmptyDataSetType {
     // Customize title decription, use the default title if nil.

@@ -7,51 +7,115 @@
 #
 
 Pod::Spec.new do |s|
-  s.name             = 'MarsUIKit'
-  s.version          = '2.0.0'
-  s.summary          = 'MarsUIKit wraps some commonly used UI components.'
-  
-  # This description is used to generate tags and improve search results.
-  #   * Think: What does it do? Why did you write it? What is the focus?
-  #   * Try to keep it short, snappy and to the point.
-  #   * Write the description between the DESC delimiters below.
-  #   * Finally, don't worry about the indent, CocoaPods strips it!
-  
-  s.description      = <<-DESC
-  TODO: MarsUIKit wraps some commonly used UI components.
-  DESC
-  
-  s.homepage         = 'https://github.com/chenxing640/MarsUIKit'
-  # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
-  s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'Teng Fei' => 'hansen981@126.com' }
-  s.source           = { :git => 'https://github.com/chenxing640/MarsUIKit.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
-  
-  s.ios.deployment_target = '11.0'
-  s.tvos.deployment_target = '11.0'
-  
-  s.swift_versions = ['4.2', '5.0']
-  s.requires_arc = true
-  s.source_files = 'MarsUIKit/Classes/**/*.{swift}'
-  # s.resource_bundles = {
-  #   'MarsUIKit' => ['MarsUIKit/Assets/*.png']
-  # }
-  
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
-  s.dependency 'Toaster'
-  s.dependency 'Toast-Swift', '~> 5.0.1'
-  s.dependency 'SwiftMessages'
-  s.dependency 'SVProgressHUD'
-  s.dependency 'OverlayController'
-  s.dependency 'RxCocoa'
-  s.dependency 'RxSwift'
-  s.dependency 'Kingfisher'
-  s.dependency 'MJRefresh'
-  #s.dependency 'KafkaRefresh'
-  s.dependency 'DZNEmptyDataSet'
-  s.vendored_frameworks = 'MarsUIKit/Assets/SVGAPlayerXFWK/SVGAPlayer.xcframwork'
-  
+    s.name             = 'MarsUIKit'
+    s.version          = '2.0.0'
+    s.summary          = 'MarsUIKit wraps some commonly used UI components.'
+    
+    # This description is used to generate tags and improve search results.
+    #   * Think: What does it do? Why did you write it? What is the focus?
+    #   * Try to keep it short, snappy and to the point.
+    #   * Write the description between the DESC delimiters below.
+    #   * Finally, don't worry about the indent, CocoaPods strips it!
+    
+    s.description      = <<-DESC
+    TODO: MarsUIKit wraps some commonly used UI components.
+    DESC
+    
+    s.homepage         = 'https://github.com/chenxing640/MarsUIKit'
+    # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
+    s.license          = { :type => 'MIT', :file => 'LICENSE' }
+    s.author           = { 'Teng Fei' => 'hansen981@126.com' }
+    s.source           = { :git => 'https://github.com/chenxing640/MarsUIKit.git', :tag => s.version.to_s }
+    # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+    
+    s.ios.deployment_target = '11.0'
+    s.tvos.deployment_target = '11.0'
+    
+    s.swift_versions = ['4.2', '5.0']
+    s.requires_arc = true
+    s.default_subspecs = 'Base', 'BaseUI'
+    
+    #s.source_files = 'MarsUIKit/Classes/**/*.{swift}'
+    # s.resource_bundles = {
+    #   'MarsUIKit' => ['MarsUIKit/Assets/*.png']
+    # }
+    
+    # s.public_header_files = 'Pod/Classes/**/*.h'
+    # s.frameworks = 'UIKit', 'MapKit'
+    # s.dependency 'AFNetworking', '~> 2.3'
+    
+    s.subspec "Base" do |base|
+        base.source_files = 'MarsUIKit/Classes/Base/*.{swift}'
+    end
+    
+    s.subspec "BaseUI" do |bui|
+        bui.source_files = 'MarsUIKit/Classes/BaseUI/*.{swift}'
+        bui.dependency 'MarsUIKit/Base'
+        bui.dependency 'RxSwift'
+        bui.dependency 'RxCocoa'
+        bui.dependency 'Kingfisher'
+        bui.dependency 'SVProgressHUD'
+    end
+    
+    s.subspec "EmptyDataSet" do |eds|
+        eds.source_files = 'MarsUIKit/Classes/EmptyDataSet/*.{swift}'
+        eds.ios.deployment_target = '11.0'
+        eds.dependency 'MarsUIKit/Base'
+        eds.dependency 'DZNEmptyDataSet'
+    end
+    
+    s.subspec "RxEmptyDataSet" do |rxeds|
+        rxeds.source_files = 'MarsUIKit/Classes/RxEmptyDataSet/*.{swift}'
+        rxeds.ios.deployment_target = '11.0'
+        rxeds.dependency 'MarsUIKit/EmptyDataSet'
+        rxeds.dependency 'RxSwift'
+        rxeds.dependency 'RxCocoa'
+    end
+    
+    s.subspec "RxMJRefresh" do |rxmjr|
+        rxmjr.source_files = 'MarsUIKit/Classes/RxMJRefresh/*.{swift}'
+        rxmjr.ios.deployment_target = '11.0'
+        rxmjr.dependency 'RxSwift'
+        rxmjr.dependency 'RxCocoa'
+        rxmjr.dependency 'MJRefresh'
+    end
+    
+    s.subspec "RxKafkaRefresh" do |rxkafkar|
+        rxkafkar.source_files = 'MarsUIKit/Classes/RxKafkaRefresh/*.{swift}'
+        rxkafkar.ios.deployment_target = '11.0'
+        rxkafkar.dependency 'RxSwift'
+        rxkafkar.dependency 'RxCocoa'
+        rxkafkar.dependency 'KafkaRefresh'
+    end
+    
+    s.subspec "OverlayView" do |olv|
+        olv.source_files = 'MarsUIKit/Classes/OverlayView/*.{swift}'
+        olv.ios.deployment_target = '11.0'
+        olv.dependency 'MarsUIKit/Base'
+        olv.dependency 'OverlayController'
+    end
+    
+    s.subspec "Messages" do |msg|
+        msg.source_files = 'MarsUIKit/Classes/Messages/*.{swift}'
+        msg.ios.deployment_target = '11.0'
+        msg.dependency 'MarsUIKit/Base'
+        msg.dependency 'SwiftMessages'
+    end
+    
+    s.subspec "Toast" do |toast|
+        toast.source_files = 'MarsUIKit/Classes/Toast/*.{swift}'
+        toast.ios.deployment_target = '11.0'
+        toast.dependency 'MarsUIKit/Base'
+        toast.dependency 'Toaster'
+        toast.dependency 'Toast-Swift', '~> 5.0.1'
+    end
+    
+    s.subspec "SVGA" do |svgap|
+        svgap.source_files = 'MarsUIKit/Classes/SVGA/*.{swift}'
+        svgap.ios.deployment_target = '11.0'
+        svgap.dependency 'SSZipArchive' # SVGAPlayer
+        svgap.dependency 'Protobuf' # SVGAPlayer
+        svgap.vendored_frameworks = 'MarsUIKit/Assets/SVGAPlayerXFWK/SVGAPlayer.xcframework' # SVGAPlayer
+    end
+    
 end

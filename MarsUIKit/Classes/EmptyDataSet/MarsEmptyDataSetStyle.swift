@@ -5,7 +5,7 @@
 //  Created by Teng Fei on 2022/10/19.
 //
 
-#if os(iOS)
+#if os(iOS) || os(tvOS)
 import UIKit
 
 //MARK: - EmptyDataSetStyle
