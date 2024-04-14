@@ -1,18 +1,18 @@
 # MarsUIKit
 
-[![Version](https://img.shields.io/cocoapods/v/MarsUIKit.svg?style=flat)](https://cocoapods.org/pods/MarsUIKit)
-[![License](https://img.shields.io/cocoapods/l/MarsUIKit.svg?style=flat)](https://cocoapods.org/pods/MarsUIKit)
-[![Platform](https://img.shields.io/cocoapods/p/MarsUIKit.svg?style=flat)](https://cocoapods.org/pods/MarsUIKit)
+ [![Version](https://img.shields.io/cocoapods/v/MarsUIKit.svg?style=flat)](https://cocoapods.org/pods/MarsUIKit)
+ [![License](https://img.shields.io/cocoapods/l/MarsUIKit.svg?style=flat)](https://cocoapods.org/pods/MarsUIKit)
+ [![Platform](https://img.shields.io/cocoapods/p/MarsUIKit.svg?style=flat)](https://cocoapods.org/pods/MarsUIKit)
 
 `MarsUIKit` wraps some commonly used UI components.
 
 ## Example
 
-To use this pod, please see [CXSwiftKit_Example](https://github.com/chenxing640/CXSwiftKit.git).
+To use this library, please go to **[here](https://github.com/chenxing640/CXSwiftKit.git)**!.
 
 ## Requirements
 
-* Xcode 13.0+, iOS 10.0
+* Xcode 13.0+, iOS 11.0, tvOS 11.0
 
 ## Installation
 
@@ -44,7 +44,7 @@ Add the header in `Svga.pbobjc.m` or `Svga.pbobjc.h`.
 
 ## Author
 
-chenxing, chenxing640@foxmail.com
+Teng Fei, hansen981@126.com
 
 ## License
 
