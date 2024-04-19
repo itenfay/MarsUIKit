@@ -1,40 +1,26 @@
 use_frameworks!
 
-platform :ios, '10.0'
+platform :ios, '11.0'
 #source 'https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git'
 
 target 'MarsUIKit_Example' do
   pod 'MarsUIKit', :path => '../'
-  
-  # RxSwift
-  pod 'RxSwift'
-  # RxCocoa
-  pod 'RxCocoa'
-  # SVProgressHUD
-  pod 'SVProgressHUD'
-  
-  # Kingfisher
-  pod 'Kingfisher'
-  
-  # KafkaRefresh
-  pod 'KafkaRefresh'
-  # MJRefresh
-  pod 'MJRefresh'
-  # DZNEmptyDataSet
-  pod 'DZNEmptyDataSet'
-  
-  # SwiftMessages
-  pod 'SwiftMessages'
-  # Toaster
-  pod 'Toaster'
-  # Toast_Swift
-  pod 'Toast-Swift', '~> 5.0.1'
-  # OverlayController
-  pod 'OverlayController'
-  # SVGA: /Pods/SVGAPlayer/Source/pbobjc/Svga.pbobjc.m: Conflicting types for 'OSAtomicCompareAndSwapPtrBarrier'
-  pod 'SVGAPlayer'
-  #pod 'SSZipArchive', '~> 2.1.4'
-  #pod 'Protobuf', '~> 3.4'
+  # EmptyDataSet
+  pod 'MarsUIKit/EmptyDataSet', :path => '../'
+  # RxEmptyDataSet
+  pod 'MarsUIKit/RxEmptyDataSet', :path => '../'
+  # RxMJRefresh
+  pod 'MarsUIKit/RxMJRefresh', :path => '../'
+  # RxKafkaRefresh
+  pod 'MarsUIKit/RxKafkaRefresh', :path => '../'
+  # OverlayView
+  pod 'MarsUIKit/OverlayView', :path => '../'
+  # Messages
+  pod 'MarsUIKit/Messages', :path => '../'
+  # Toast
+  pod 'MarsUIKit/Toast', :path => '../'
+  # SVGA
+  pod 'MarsUIKit/SVGA', :path => '../'
   
   target 'MarsUIKit_Tests' do
     inherit! :search_paths

@@ -39,7 +39,7 @@ extension Reactive where Base: MarsEmptyDataSetDecorator {
                 }
                 target.style = style
             }
-            target.setEmptyDataDelegate()
+            target.bindDataSource()
             target.forceRefreshEmptyData()
         }
     }

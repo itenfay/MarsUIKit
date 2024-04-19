@@ -50,8 +50,8 @@ public class MarsEmptyDataSetDecorator: NSObject, MarsEmptyDataPresentable {
         listView = view
     }
     
-    /// Set the delegate for empty data.
-    @objc public func setEmptyDataDelegate() {
+    /// Binds the data source for empty data set.
+    @objc public func bindDataSource() {
         listView?.emptyDataSetSource = self
         listView?.emptyDataSetDelegate = self
     }

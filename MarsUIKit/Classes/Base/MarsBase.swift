@@ -6,6 +6,9 @@
 //
 
 import Foundation
+#if os(iOS) || os(tvOS)
+import UIKit
+#endif
 
 public struct MarsBase<Base> {
     let base: Base
@@ -34,6 +37,8 @@ extension MarsBaseCompatible {
 }
 
 extension NSObject: MarsBaseCompatible {}
+
+#if os(iOS) || os(tvOS)
 
 /// The extension for UIColor.
 extension UIColor {
@@ -71,3 +76,4 @@ extension UIColor {
     
 }
 
+#endif
