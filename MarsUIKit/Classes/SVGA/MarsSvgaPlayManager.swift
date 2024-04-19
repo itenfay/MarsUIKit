@@ -30,66 +30,84 @@ public class MarsSvgaPlayManager: NSObject, MarsSvgaPlayPresentable {
         svgaParser = SVGAParser()
     }
     
-    @objc public var svgaAnimatedToPercentageHandler: ((_ percentage: CGFloat) -> Void)?
+    @objc public var onSvgaAnimatedToPercentageHandler: ((_ percentage: CGFloat) -> Void)?
     
-    private var currentOp: MarsSvgaPlayOperation?
+    /// The operations currently in the queue.
+    @objc public var operations: [MarsSvgaPlayOperation] = []
+    
+    private var currOp: MarsSvgaPlayOperation?
+    /// The count of retries is 3.
     private var retryCount: Int8 = 3
-    private var animationFinished: Bool = false
-    private let mutex = DispatchSemaphore(value: 1)
+    private var animFinished: Bool = false
+    private let sema = DispatchSemaphore(value: 1)
     
+    /// queue.operations: expression of type '[Operation]' is unused.
     private lazy var queue: OperationQueue = {
         let queue = OperationQueue.init()
         queue.maxConcurrentOperationCount = 1
         return queue
     }()
     
+    @objc public func setSVGAPlayer(_ player: SVGAPlayer?) {
+        self.svgaPlayer = player
+    }
+    
     @objc public func play(url: String?, loops: Int = 1, clearsAfterStop: Bool = true) {
-        svgaPlayer?.loops = Int32(loops)
-        svgaPlayer?.clearsAfterStop = clearsAfterStop
+        configSVGAPlayer(loops, clearsAfterStop)
         let operation = MarsSvgaPlayOperation.create(withUrl: url) { [unowned self] op in
-            self.currentOp = op
             self.play(with: op)
         }
+        // Add operation to the array(`operations`).
+        operations.append(operation)
         queue.addOperation(operation)
     }
     
     @objc public func play(named: String?, inBundle bundle: Bundle? = nil, loops: Int = 1, clearsAfterStop: Bool = true) {
-        svgaPlayer?.loops = Int32(loops)
-        svgaPlayer?.clearsAfterStop = clearsAfterStop
+        configSVGAPlayer(loops, clearsAfterStop)
         let operation = MarsSvgaPlayOperation.create(withName: named, inBundle: bundle) { [unowned self] op in
-            self.currentOp = op
             self.play(with: op)
         }
+        // Add operation to the array(`operations`).
+        operations.append(operation)
         queue.addOperation(operation)
     }
     
+    private func configSVGAPlayer(_ loops: Int, _ clearsAfterStop: Bool) {
+        if let player = svgaPlayer {
+            let lps: Int32 = Int32(loops)
+            if player.loops != lps {
+                player.loops = lps
+            }
+            if player.clearsAfterStop != clearsAfterStop {
+                player.clearsAfterStop = clearsAfterStop
+            }
+        }
+    }
+    
     private func play(with op: MarsSvgaPlayOperation) {
+        self.currOp = op
         if let url = op.svgaUrl, !url.isEmpty {
-            svgaParser.parse(with: URL.init(string: url)!) { [unowned self] videoItem in
-                self.displaySvga(withHidden: false)
-                self.svgaPlayer?.videoItem = videoItem
-                self.svgaPlayer?.startAnimation()
+            svgaParser.parse(with: URL(string: url)!) { [unowned self] videoItem in
+                self.startAnimation(with: videoItem)
             } failureBlock: { [unowned self] error in
-                if error != nil {
-                    debugPrint("error=\(error!)")
+                if let err = error {
+                    debugPrint("[E] error=\(err)")
                 }
-                self.retryToplay(with: op)
+                self.retryToPlay(with: op)
             }
         } else if let name = op.svgaName, !name.isEmpty {
             svgaParser.parse(withNamed: name, in: op.inBundle) { [unowned self] videoItem in
-                self.displaySvga(withHidden: false)
-                self.svgaPlayer?.videoItem = videoItem
-                self.svgaPlayer?.startAnimation()
+                self.startAnimation(with: videoItem)
             } failureBlock: { [unowned self] error in
-                debugPrint("error=\(error)")
-                self.retryToplay(with: op)
+                debugPrint("[E] error=\(error)")
+                self.retryToPlay(with: op)
             }
         } else {
             finishAnimating()
         }
     }
     
-    private func retryToplay(with op: MarsSvgaPlayOperation) {
+    private func retryToPlay(with op: MarsSvgaPlayOperation) {
         if retryCount == 0 {
             finishAnimating()
         } else {
@@ -111,32 +129,36 @@ public class MarsSvgaPlayManager: NSObject, MarsSvgaPlayPresentable {
     }
     
     @objc public func finishAnimating() {
-        mutex.wait()
+        sema.wait()
         retryCount = 3
-        currentOp?.finish()
-        currentOp = nil
-        if animationFinished {
-            animationFinished = false
+        if let op = currOp {
+            operations.removeAll { $0 === op }
+            self.currOp = nil
+        }
+        if animFinished {
+            animFinished = false
         } else {
             DispatchQueue.main.async {
-                self.clearSvga()
+                self.clear()
             }
         }
         DispatchQueue.main.async {
-            self.displaySvga(withHidden: true)
+            self.svgaPlayer?.isHidden = true
         }
-        mutex.signal()
+        sema.signal()
     }
     
-    private func clearSvga() {
+    private func startAnimation(with videoItem: SVGAVideoEntity?) {
+        self.svgaPlayer?.isHidden = false
+        self.svgaPlayer?.videoItem = videoItem
+        self.svgaPlayer?.startAnimation()
+    }
+    
+    private func clear() {
         svgaPlayer?.stopAnimation()
         if svgaPlayer?.clearsAfterStop == false {
             svgaPlayer?.clear()
         }
-    }
-    
-    private func displaySvga(withHidden hidden: Bool) {
-        svgaPlayer?.isHidden = hidden
     }
     
 }
@@ -144,12 +166,12 @@ public class MarsSvgaPlayManager: NSObject, MarsSvgaPlayPresentable {
 extension MarsSvgaPlayManager: SVGAPlayerDelegate {
     
     public func svgaPlayerDidFinishedAnimation(_ player: SVGAPlayer!) {
-        animationFinished = true
+        animFinished = true
         finishAnimating()
     }
     
     public func svgaPlayer(_ player: SVGAPlayer!, didAnimatedToPercentage percentage: CGFloat) {
-        svgaAnimatedToPercentageHandler?(percentage)
+        onSvgaAnimatedToPercentageHandler?(percentage)
     }
     
 }
