@@ -45,8 +45,12 @@ public class MarsSvgaPlayManager: NSObject, MarsSvgaPlayPresentable {
     private lazy var queue: OperationQueue = {
         let queue = OperationQueue.init()
         queue.maxConcurrentOperationCount = 1
+        queue.name = "mars.play.svga.queue"
         return queue
     }()
+    
+    /// Gets an operation queue that has already been created.
+    @objc public var opQueue: OperationQueue { queue }
     
     @objc public func setSVGAPlayer(_ player: SVGAPlayer?) {
         self.svgaPlayer = player
