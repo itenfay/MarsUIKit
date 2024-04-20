@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'MarsUIKit'
-  s.version          = '2.0.3'
+  s.version          = '2.0.4'
   s.summary          = 'MarsUIKit wraps some commonly used UI components.'
   
   # This description is used to generate tags and improve search results.
@@ -99,7 +99,7 @@ Pod::Spec.new do |s|
     msg.source_files = 'MarsUIKit/Classes/Messages/*.{swift}'
     msg.ios.deployment_target = '11.0'
     msg.dependency 'MarsUIKit/Base'
-    msg.dependency 'SwiftMessages', '~> 9.0.6' # Support ios 9.0+
+    msg.dependency 'SwiftMessages', '<= 9.0.6' # Support ios 9.0+
   end
   
   s.subspec "Toast" do |toast|
