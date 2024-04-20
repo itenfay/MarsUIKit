@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'MarsUIKit'
-  s.version          = '2.0.2'
+  s.version          = '2.0.3'
   s.summary          = 'MarsUIKit wraps some commonly used UI components.'
   
   # This description is used to generate tags and improve search results.
@@ -51,48 +51,48 @@ Pod::Spec.new do |s|
   s.subspec "BaseUI" do |bui|
     bui.source_files = 'MarsUIKit/Classes/BaseUI/*.{swift}'
     bui.dependency 'MarsUIKit/Base'
-    bui.dependency 'RxSwift'
-    bui.dependency 'RxCocoa'
-    bui.dependency 'Kingfisher'
-    bui.dependency 'SVProgressHUD'
+    bui.dependency 'RxSwift', '~> 6.6.0'
+    bui.dependency 'RxCocoa', '~> 6.6.0'
+    bui.dependency 'Kingfisher', '~> 6.3.1'
+    bui.dependency 'SVProgressHUD', '~> 2.2.6'
   end
   
   s.subspec "EmptyDataSet" do |eds|
     eds.source_files = 'MarsUIKit/Classes/EmptyDataSet/*.{swift}'
     eds.ios.deployment_target = '11.0'
     eds.dependency 'MarsUIKit/Base'
-    eds.dependency 'DZNEmptyDataSet'
+    eds.dependency 'DZNEmptyDataSet', '~> 1.8.1'
   end
   
   s.subspec "RxEmptyDataSet" do |rxeds|
     rxeds.source_files = 'MarsUIKit/Classes/RxEmptyDataSet/*.{swift}'
     rxeds.ios.deployment_target = '11.0'
     rxeds.dependency 'MarsUIKit/EmptyDataSet'
-    rxeds.dependency 'RxSwift'
-    rxeds.dependency 'RxCocoa'
+    rxeds.dependency 'RxSwift', '~> 6.6.0'
+    rxeds.dependency 'RxCocoa', '~> 6.6.0'
   end
   
   s.subspec "RxMJRefresh" do |rxmjr|
     rxmjr.source_files = 'MarsUIKit/Classes/RxMJRefresh/*.{swift}'
     rxmjr.ios.deployment_target = '11.0'
-    rxmjr.dependency 'RxSwift'
-    rxmjr.dependency 'RxCocoa'
-    rxmjr.dependency 'MJRefresh'
+    rxmjr.dependency 'RxSwift', '~> 6.6.0'
+    rxmjr.dependency 'RxCocoa', '~> 6.6.0'
+    rxmjr.dependency 'MJRefresh', '~> 3.7.6'
   end
   
   s.subspec "RxKafkaRefresh" do |rxkafkar|
     rxkafkar.source_files = 'MarsUIKit/Classes/RxKafkaRefresh/*.{swift}'
     rxkafkar.ios.deployment_target = '11.0'
-    rxkafkar.dependency 'RxSwift'
-    rxkafkar.dependency 'RxCocoa'
-    rxkafkar.dependency 'KafkaRefresh'
+    rxkafkar.dependency 'RxSwift', '~> 6.6.0'
+    rxkafkar.dependency 'RxCocoa', '~> 6.6.0'
+    rxkafkar.dependency 'KafkaRefresh', '~> 1.7.0'
   end
   
   s.subspec "OverlayView" do |olv|
     olv.source_files = 'MarsUIKit/Classes/OverlayView/*.{swift}'
     olv.ios.deployment_target = '11.0'
     olv.dependency 'MarsUIKit/Base'
-    olv.dependency 'OverlayController'
+    olv.dependency 'OverlayController', '~> 1.0.1'
   end
   
   s.subspec "Messages" do |msg|
@@ -106,15 +106,15 @@ Pod::Spec.new do |s|
     toast.source_files = 'MarsUIKit/Classes/Toast/*.{swift}'
     toast.ios.deployment_target = '11.0'
     toast.dependency 'MarsUIKit/Base'
-    toast.dependency 'Toaster'
+    toast.dependency 'Toaster', '~> 2.3.0'
     toast.dependency 'Toast-Swift', '~> 5.0.1'
   end
   
   s.subspec "SVGA" do |svgap|
     svgap.source_files = 'MarsUIKit/Classes/SVGA/*.{swift}'
     svgap.ios.deployment_target = '11.0'
-    svgap.dependency 'SSZipArchive' # SVGAPlayer
-    svgap.dependency 'Protobuf' # SVGAPlayer
+    svgap.dependency 'SSZipArchive', '~> 2.4.3'
+    svgap.dependency 'Protobuf', '~> 3.26.1'
     svgap.vendored_frameworks = 'MarsUIKit/Assets/SVGAPlayerXFWK/SVGAPlayer.xcframework' # SVGAPlayer
   end
   
