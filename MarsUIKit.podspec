@@ -54,7 +54,7 @@ Pod::Spec.new do |s|
     bui.dependency 'RxSwift', '~> 6.6.0'
     bui.dependency 'RxCocoa', '~> 6.6.0'
     bui.dependency 'Kingfisher', '~> 6.3.1'
-    bui.dependency 'SVProgressHUD', '~> 2.2.6'
+    bui.dependency 'SVProgressHUD', '~> 2.2.5'
   end
   
   s.subspec "EmptyDataSet" do |eds|
