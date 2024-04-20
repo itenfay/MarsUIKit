@@ -1,5 +1,5 @@
 //
-//  MarsSvgaPlayManager.swift
+//  MarsSVGAPlayManager.swift
 //  MarsUIKit
 //
 //  Created by Teng Fei on 2022/5/14.
@@ -10,13 +10,13 @@ import UIKit
 #if canImport(SVGAPlayer)
 import SVGAPlayer
 
-@objc public protocol MarsSvgaPlayPresentable: AnyObject {
+@objc public protocol MarsSVGAPlayPresentable: AnyObject {
     var svgaPlayer: SVGAPlayer? { get set }
 }
 
-public class MarsSvgaPlayManager: NSObject, MarsSvgaPlayPresentable {
+public class MarsSVGAPlayManager: NSObject, MarsSVGAPlayPresentable {
     
-    @objc public static let shared = MarsSvgaPlayManager()
+    @objc public static let shared = MarsSVGAPlayManager()
     
     @objc public private(set) var svgaParser: SVGAParser!
     
@@ -30,12 +30,15 @@ public class MarsSvgaPlayManager: NSObject, MarsSvgaPlayPresentable {
         svgaParser = SVGAParser()
     }
     
+    /// The handler for finishing animation.
+    @objc public var onFinishAnimationHandler: (() -> Void)?
+    /// The handler for animating to percentage.
     @objc public var onSvgaAnimatedToPercentageHandler: ((_ percentage: CGFloat) -> Void)?
     
     /// The operations currently in the queue.
-    @objc public var operations: [MarsSvgaPlayOperation] = []
+    @objc public var operations: [MarsSVGAPlayOperation] = []
     
-    private var currOp: MarsSvgaPlayOperation?
+    @objc public private(set) var currOp: MarsSVGAPlayOperation?
     /// The count of retries is 3.
     private var retryCount: Int8 = 3
     private var animFinished: Bool = false
@@ -58,7 +61,7 @@ public class MarsSvgaPlayManager: NSObject, MarsSvgaPlayPresentable {
     
     @objc public func play(url: String?, loops: Int = 1, clearsAfterStop: Bool = true) {
         configSVGAPlayer(loops, clearsAfterStop)
-        let operation = MarsSvgaPlayOperation.create(withUrl: url) { [unowned self] op in
+        let operation = MarsSVGAPlayOperation.create(withUrl: url) { [unowned self] op in
             self.play(with: op)
         }
         // Add operation to the array(`operations`).
@@ -68,7 +71,7 @@ public class MarsSvgaPlayManager: NSObject, MarsSvgaPlayPresentable {
     
     @objc public func play(named: String?, inBundle bundle: Bundle? = nil, loops: Int = 1, clearsAfterStop: Bool = true) {
         configSVGAPlayer(loops, clearsAfterStop)
-        let operation = MarsSvgaPlayOperation.create(withName: named, inBundle: bundle) { [unowned self] op in
+        let operation = MarsSVGAPlayOperation.create(withName: named, inBundle: bundle) { [unowned self] op in
             self.play(with: op)
         }
         // Add operation to the array(`operations`).
@@ -88,7 +91,7 @@ public class MarsSvgaPlayManager: NSObject, MarsSvgaPlayPresentable {
         }
     }
     
-    private func play(with op: MarsSvgaPlayOperation) {
+    private func play(with op: MarsSVGAPlayOperation) {
         self.currOp = op
         if let url = op.svgaUrl, !url.isEmpty {
             svgaParser.parse(with: URL(string: url)!) { [unowned self] videoItem in
@@ -111,7 +114,7 @@ public class MarsSvgaPlayManager: NSObject, MarsSvgaPlayPresentable {
         }
     }
     
-    private func retryToPlay(with op: MarsSvgaPlayOperation) {
+    private func retryToPlay(with op: MarsSVGAPlayOperation) {
         if retryCount == 0 {
             finishAnimating()
         } else {
@@ -137,6 +140,7 @@ public class MarsSvgaPlayManager: NSObject, MarsSvgaPlayPresentable {
         retryCount = 3
         if let op = currOp {
             operations.removeAll { $0 === op }
+            self.currOp?.finish()
             self.currOp = nil
         }
         if animFinished {
@@ -167,10 +171,11 @@ public class MarsSvgaPlayManager: NSObject, MarsSvgaPlayPresentable {
     
 }
 
-extension MarsSvgaPlayManager: SVGAPlayerDelegate {
+extension MarsSVGAPlayManager: SVGAPlayerDelegate {
     
     public func svgaPlayerDidFinishedAnimation(_ player: SVGAPlayer!) {
         animFinished = true
+        onFinishAnimationHandler?()
         finishAnimating()
     }
     

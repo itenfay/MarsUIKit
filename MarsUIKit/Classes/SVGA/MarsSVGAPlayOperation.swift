@@ -1,5 +1,5 @@
 //
-//  MarsSvgaPlayOperation.swift
+//  MarsSVGAPlayOperation.swift
 //  MarsUIKit
 //
 //  Created by Teng Fei on 2022/5/14.
@@ -8,7 +8,7 @@
 #if os(iOS)
 import Foundation
 
-public class MarsSvgaPlayOperation: Operation {
+public class MarsSVGAPlayOperation: Operation {
     
     /// The url for the svga.
     public private(set) var svgaUrl: String?
@@ -18,7 +18,7 @@ public class MarsSvgaPlayOperation: Operation {
     public private(set) var inBundle: Bundle?
     
     /// The closure for the operation starting.
-    private var startInvocation: ((MarsSvgaPlayOperation) -> Void)? = nil
+    private var startInvocation: ((MarsSVGAPlayOperation) -> Void)? = nil
     
     /// Whether the operation is executing.
     override public var isExecuting: Bool {
@@ -43,9 +43,9 @@ public class MarsSvgaPlayOperation: Operation {
     /// Creates an operation for the svga.
     public class func create(
         withUrl url: String?,
-        invocation: @escaping (MarsSvgaPlayOperation) -> Void) -> MarsSvgaPlayOperation
+        invocation: @escaping (MarsSVGAPlayOperation) -> Void) -> MarsSVGAPlayOperation
     {
-        let op = MarsSvgaPlayOperation()
+        let op = MarsSVGAPlayOperation()
         op.svgaUrl = url
         op.startInvocation = invocation
         return op
@@ -55,9 +55,9 @@ public class MarsSvgaPlayOperation: Operation {
     public class func create(
         withName name: String?,
         inBundle bundle: Bundle?,
-        invocation: @escaping (MarsSvgaPlayOperation) -> Void) -> MarsSvgaPlayOperation
+        invocation: @escaping (MarsSVGAPlayOperation) -> Void) -> MarsSVGAPlayOperation
     {
-        let op = MarsSvgaPlayOperation()
+        let op = MarsSVGAPlayOperation()
         op.svgaName = name
         op.inBundle = bundle
         op.startInvocation = invocation
