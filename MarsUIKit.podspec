@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'MarsUIKit'
-  s.version          = '2.0.5'
+  s.version          = '2.1.0'
   s.summary          = 'MarsUIKit wraps some commonly used UI components.'
   
   # This description is used to generate tags and improve search results.
@@ -21,17 +21,18 @@ Pod::Spec.new do |s|
   TODO: MarsUIKit wraps some commonly used UI components.
   DESC
   
-  s.homepage         = 'https://github.com/chenxing640/MarsUIKit'
+  s.homepage         = 'https://github.com/itenfay/MarsUIKit'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'Teng Fei' => 'hansen981@126.com' }
-  s.source           = { :git => 'https://github.com/chenxing640/MarsUIKit.git', :tag => s.version.to_s }
+  s.author           = { 'Tenfay' => 'itenfay@163.com' }
+  s.source           = { :git => 'https://github.com/itenfay/MarsUIKit.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
   
   s.ios.deployment_target = '11.0'
   s.tvos.deployment_target = '11.0'
   
-  s.swift_versions = ['4.2', '5.0']
+  #s.swift_versions = ['4.2', '5.0']
+  s.swift_version = '5.0'
   s.requires_arc = true
   s.default_subspecs = 'Base', 'BaseUI'
   

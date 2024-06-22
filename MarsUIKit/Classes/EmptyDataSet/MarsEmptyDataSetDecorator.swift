@@ -2,7 +2,7 @@
 //  MarsEmptyDataSetDecorator.swift
 //  MarsUIKit
 //
-//  Created by Teng Fei on 2022/5/9.
+//  Created by Tenfay on 2022/5/9.
 //
 
 #if os(iOS) || os(tvOS)

@@ -2,7 +2,7 @@
 //  MarsEmptyDataSetStyle.swift
 //  MarsUIKit
 //
-//  Created by Teng Fei on 2022/10/19.
+//  Created by Tenfay on 2022/10/19.
 //
 
 #if os(iOS) || os(tvOS)

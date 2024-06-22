@@ -8,11 +8,11 @@
 
 ## Example
 
-To use this library, please go to **[here](https://github.com/chenxing640/CXSwiftKit.git)**!.
+To use this library, please go to **[here](https://github.com/itenfay/FireKylin.git)**!.
 
 ## Requirements
 
-* Xcode 13.0+, iOS 11.0, tvOS 11.0
+* Xcode 14.0+, iOS 11.0, tvOS 11.0
 
 ## Installation
 
@@ -59,10 +59,10 @@ Add the header in `Svga.pbobjc.m` or `Svga.pbobjc.h`.
 #import <libkern/OSAtomic.h>
 ```
 
-## Author
-
-Teng Fei, hansen981@126.com
-
 ## License
 
 MarsUIKit is available under the MIT license. See the LICENSE file for more info.
+
+## Feedback is welcome
+
+If you notice any issue to create an issue. I will be happy to help you.
